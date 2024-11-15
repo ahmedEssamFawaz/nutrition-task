@@ -1,4 +1,4 @@
-import mockResponse from "@/api/response.json";
+import response from "@/api/response.json";
 
 const state = {
   nutritionData: {},
@@ -12,7 +12,7 @@ const mutations = {
 
 const actions = {
   fetchNutritionData({ commit }) {
-    const data = mockResponse.label;
+    const data = response.label;
     commit("setNutritionData", data);
   },
 };
