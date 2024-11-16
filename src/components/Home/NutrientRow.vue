@@ -37,7 +37,7 @@ export default {
       if (this.$i18n.locale == "ar") {
         return this.nutrient.unit?.name_ar || "جم";
       }
-      return this.nutrient.unit?.name || this.nutrient.unit;
+      return this.nutrient.unit?.name || this.nutrient?.unit;
     },
   },
 };

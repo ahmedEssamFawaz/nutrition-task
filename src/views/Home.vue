@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import NutritionLabel from "@/components/NutritionLabel.vue";
+import NutritionLabel from "@/components/Home/NutritionLabel.vue";
 
 export default {
   name: "HomeView",

@@ -1,9 +1,8 @@
 <template>
   <v-app>
     <navigation-drawer />
-    <div>
-      <v-btn @click="changeLanguage" text>{{ getLanguageText }}</v-btn>
-    </div>
+
+    <language-toggler />
 
     <v-main>
       <router-view />
@@ -13,27 +12,9 @@
 
 <script>
 import NavigationDrawer from "@/components/Global/NavigationDrawer.vue";
+import LanguageToggler from "@/components/Global/LanguageToggler.vue";
 export default {
-  components: { NavigationDrawer },
+  components: { NavigationDrawer, LanguageToggler },
   name: "App",
-  computed: {
-    getLanguageText() {
-      if (this.$i18n.locale == "en") {
-        return "العربية";
-      }
-      return "English";
-    },
-  },
-  methods: {
-    changeLanguage() {
-      if (this.$i18n.locale == "en") {
-        this.$i18n.locale = "ar";
-        this.$vuetify.rtl = true;
-        return;
-      }
-      this.$i18n.locale = "en";
-      this.$vuetify.rtl = false;
-    },
-  },
 };
 </script>
