@@ -63,7 +63,7 @@ export default {
     getNutrientName() {
       return (nutrient) => {
         if (this.$i18n.locale === "ar") {
-          return nutrient.name_ar;
+          return nutrient?.name_ar || nutrient.name;
         }
         return nutrient.name;
       };

@@ -29,7 +29,7 @@ export default {
   computed: {
     getNutrientName() {
       if (this.$i18n.locale == "ar") {
-        return this.nutrient.name_ar;
+        return this.nutrient?.name_ar || this.nutrient.name;
       }
       return this.nutrient.name;
     },
