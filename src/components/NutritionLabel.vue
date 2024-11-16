@@ -1,13 +1,16 @@
 <template>
   <div class="nutrition-label-wrapper">
-    <h1 class="head-title">Nutrition Facts</h1>
+    <h1 class="head-title">{{ $t("Nutrition Facts") }}</h1>
     <hr />
-
     <div class="serving-info-wrapper mb-2">
-      <div class="serving-per-container">1 Serving Per Container</div>
+      <div class="serving-per-container">
+        {{ servingPerContainer }} {{ $t("Serving Per Container") }}
+      </div>
       <div class="serving-size">
-        <span class="serving-size-title">Serving Size</span>
-        <span class="serving-size-value">{{ servingSize }}g</span>
+        <span class="serving-size-title">{{ $t("Serving Size") }}</span>
+        <span class="serving-size-value"
+          >{{ servingSize }}{{ $t("gram") }}</span
+        >
       </div>
     </div>
     <hr class="custom-divider" />
@@ -16,8 +19,10 @@
       class="calories-wrapper d-flex justify-space-between align-end mt-2 mb-3"
     >
       <div class="info-section d-flex flex-column">
-        <span class="info-section-amount-title"> Amount Per Serving </span>
-        <span class="info-section-calories-title"> Calories </span>
+        <span class="info-section-amount-title">
+          {{ $t("Amount Per Serving") }}
+        </span>
+        <span class="info-section-calories-title"> {{ $t("Calories") }} </span>
       </div>
       <div class="calories-value">
         <span>{{ calories }}</span>
@@ -27,7 +32,7 @@
     <hr class="custom-divider thiner" />
 
     <div class="daily-value-wrapper text-end">
-      <span>% Daily Value *</span>
+      <span>% {{ $t("Daily Value") }} *</span>
     </div>
     <hr />
 
@@ -41,9 +46,7 @@
 
     <div class="disclaimer">
       <p>
-        * The % Daily Value (DV) tells you how much a nutrient in a serving of
-        food contributes to a daily diet. 2,000 calories a day is used for
-        general nutrition advice.
+        {{ $t("DailyNote") }}
       </p>
     </div>
   </div>
@@ -58,12 +61,14 @@ export default {
   components: { NutrientSection },
   computed: {
     ...mapGetters("label", ["getNutritionData"]),
-
+    servingPerContainer() {
+      return this.getNutritionData?.amounts?.number_of_servings;
+    },
     servingSize() {
-      return this.getNutritionData?.amounts?.serving || 0;
+      return this.getNutritionData?.amounts?.serving;
     },
     calories() {
-      const calories = this.getNutritionData?.serving?.Calories?.value || 0;
+      const calories = this.getNutritionData?.serving?.Calories?.value;
       return Math.round(calories);
     },
     nutrients() {

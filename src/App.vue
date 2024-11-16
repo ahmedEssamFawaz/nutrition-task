@@ -1,39 +1,9 @@
 <template>
   <v-app>
     <navigation-drawer />
-
-    <v-app-bar absolute color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+    <div>
+      <v-btn @click="changeLanguage" text>{{ getLanguageText }}</v-btn>
+    </div>
 
     <v-main>
       <router-view />
@@ -46,9 +16,24 @@ import NavigationDrawer from "@/components/Global/NavigationDrawer.vue";
 export default {
   components: { NavigationDrawer },
   name: "App",
-
-  data: () => ({
-    //
-  }),
+  computed: {
+    getLanguageText() {
+      if (this.$i18n.locale == "en") {
+        return "العربية";
+      }
+      return "English";
+    },
+  },
+  methods: {
+    changeLanguage() {
+      if (this.$i18n.locale == "en") {
+        this.$i18n.locale = "ar";
+        this.$vuetify.rtl = true;
+        return;
+      }
+      this.$i18n.locale = "en";
+      this.$vuetify.rtl = false;
+    },
+  },
 };
 </script>

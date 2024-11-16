@@ -1,10 +1,17 @@
 <template>
   <div>
-    <v-navigation-drawer absolute permanent right>
+    <v-navigation-drawer
+      absolute
+      permanent
+      :right="!$vuetify.rtl"
+      :left="$vuetify.rtl"
+    >
       <template v-slot:prepend>
         <v-list-item two-line>
           <v-list-item-content>
-            <v-list-item-title>Nutrient Selection</v-list-item-title>
+            <v-list-item-title>{{
+              $t("Nutrient Selection")
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </template>
@@ -19,7 +26,7 @@
           <v-list-item-content class="pa-0">
             <div class="d-flex justify-space-between align-center">
               <div>
-                {{ nutrient.name }}
+                {{ getNutrientName(nutrient) }}
               </div>
               <div>
                 <v-checkbox
@@ -53,6 +60,14 @@ export default {
   },
   computed: {
     ...mapGetters("label", ["getNutritionData"]),
+    getNutrientName() {
+      return (nutrient) => {
+        if (this.$i18n.locale === "ar") {
+          return nutrient.name_ar;
+        }
+        return nutrient.name;
+      };
+    },
   },
 };
 </script>
